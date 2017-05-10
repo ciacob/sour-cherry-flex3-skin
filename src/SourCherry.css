@@ -1,0 +1,710 @@
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace desktop "ro.ciacob.desktop.*";
+@namespace ui "ro.ciacob.cecil.view.ui.*";
+@namespace components "ro.ciacob.components.flex.*";
+@namespace windows "ro.ciacob.desktop.windows.*";
+
+@font-face {
+	src:url("fonts/arial.ttf");
+	fontFamily: Arial;
+	fontStyle: normal; 
+	fontWeight: normal; 
+	advancedAntiAliasing: true;
+	embedAsCFF: false;
+}
+
+@font-face {
+	src:url("fonts/ariali.ttf");
+	fontFamily: Arial;
+	fontStyle: italic; 
+	fontWeight: normal; 
+	advancedAntiAliasing: true;
+	embedAsCFF: false;
+}
+
+@font-face {
+	src:url("fonts/arialbi.ttf");
+	fontFamily: Arial;
+	fontStyle: italic; 
+	fontWeight: bold; 
+	advancedAntiAliasing: true;
+	embedAsCFF: false;
+}
+
+@font-face {
+	src:url("fonts/arialbd.ttf");
+	fontFamily: Arial;
+	fontStyle: normal; 
+	fontWeight: bold;
+	advancedAntiAliasing: true;
+	embedAsCFF: false;
+}
+
+/* Overall settings, possibly inherited by all components */ 
+mx|Application,
+mx|WindowedApplication,
+desktop|ApplicationLoader,
+.mainWindow {
+	fontSize: 14px;
+	color: #2c0c01;
+	backgroundGradientColors: #97928f, #a9a4a2;
+	backgroundColor: #a9a4a2;
+	themeColor: #621319;
+	font-anti-alias-type: advanced;
+}
+
+/* Overall settings (not following inheritance chain) */
+global {
+	focusAlpha: 0;
+	fontFamily: Arial;
+	fontSize: 14px;
+	lineHeight: 18px;
+	modalTransparencyBlur: 0;
+	modalTransparency: 0;
+	modalTransparencyColor: 0;
+	modalTransparencyDuration: 0;
+	backgroundDisabledColor: #a9a4a2;
+	disabledOverlayAlpha: 0.4;
+}
+
+/* Settings for the ApplicationControlBar component */
+mx|ApplicationControlBar {
+	borderSkin: Embed(source="SourCherry/ApplicationControlBar/ApplicationControlBar_borderSkin.png");
+}
+.appCtrlBarUndocked {
+	borderSkin: Embed(
+		source="SourCherry/ApplicationControlBar/ApplicationControlBar_borderSkinUndocked.png",
+		scaleGridLeft="1", scaleGridTop="1", scaleGridRight="9",scaleGridBottom="9");
+}
+
+/* Settings for the Accordion component */
+mx|AccordionHeader {
+	upSkin: Embed(source="SourCherry/Tab/TabBarSkin.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	downSkin: Embed(source="SourCherry/Tab/TabBarSkin.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	selectedUpSkin: Embed(source="SourCherry/Tab/TabBarSkinSelected.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	selectedDownSkin: Embed(source="SourCherry/Tab/TabBarSkinSelected.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	selectedOverSkin: Embed(source="SourCherry/Tab/TabBarSkinSelected.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	selectedDisabledSkin: Embed(source="SourCherry/Tab/TabBarSkinSelectedDisabled.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	overSkin: Embed(source="SourCherry/Tab/TabBarSkin.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	disabledSkin: Embed(source="SourCherry/Tab/TabBarSkinDisabled.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	fontSize: 14px;
+	fontWeight: normal;
+	color: #f5f5f8;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	disabledColor: #c0c0c0;
+	paddingLeft: 10px;
+	paddingRight: 10px;
+	paddingTop: 4px;
+}
+mx|Accordion {
+	border-style: none;
+	background-alpha: 0;
+	openDuration: 0;
+}
+
+/**
+ * This custom IFocusManagerComponent implementor does not inherit 
+ * a default `backgroundSkin`, so we must enforce one.
+ */
+components|MainMenuBar {
+	backgroundSkin: ClassReference("mx.skins.halo.MenuBarBackgroundSkin");
+}
+
+/* Settings for the Menu and MenuBar components */
+mx|MenuBar, components|MainMenuBar {
+	itemOverSkin: Embed(source="SourCherry/MenuBar/MenuSkinOver.png");
+	itemDownSkin: Embed(source="SourCherry/MenuBar/MenuSkinOver.png");
+	fillColors: #111111,#000000;
+	fillAlphas: 1,1;
+	highlightAlphas: 0,0;
+}
+
+mx|MenuBar, components|MainMenuBar, mx|Menu, components|MainMenu, .menuStyle {
+	fontFamily: Arial;
+	fontSize: 14px;
+	color: #ffffff;
+	borderStyle: none;
+}
+
+mx|Menu, components|MainMenu, .menuStyle {
+	backgroundColor: #111111;
+	paddingTop: 6px;
+	paddingBottom: 6px;
+	color: #ffffff;
+	rollOverColor: #621319;
+	selectionColor: #621319;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	openDuration: 0;
+	checkDisabledIcon: Embed(source="SourCherry/MenuBar/checkMarkDisabled.png");
+	radioIcon: Embed(source="SourCherry/MenuBar/radioMark.png");
+	branchIcon: Embed(source="SourCherry/MenuBar/branchIcon.png");
+ 	checkIcon: Embed(source="SourCherry/MenuBar/checkMark.png");
+	separatorSkin: Embed(source="SourCherry/MenuBar/separator.png");
+ 	branchDisabledIcon: Embed(source="SourCherry/MenuBar/branchIconDisabled.png");
+	radioDisabledIcon: Embed(source="SourCherry/MenuBar/radioMarkDisabled.png");
+}
+
+mx|NumericStepper {
+	upArrowUpSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_upArrowUpSkin.png",scaleGridLeft="13", scaleGridTop="1", scaleGridRight="14",scaleGridBottom="5");
+	upArrowOverSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_upArrowOverSkin.png",scaleGridLeft="13", scaleGridTop="1", scaleGridRight="14",scaleGridBottom="5");
+	upArrowDownSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_upArrowDownSkin.png",scaleGridLeft="13", scaleGridTop="1", scaleGridRight="14",scaleGridBottom="5");
+	upArrowDisabledSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_upArrowDisabledSkin.png",scaleGridLeft="13", scaleGridTop="1", scaleGridRight="14",scaleGridBottom="5");
+
+	downArrowUpSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_downArrowUpSkin.png",scaleGridLeft="13", scaleGridTop="7", scaleGridRight="14",scaleGridBottom="11");
+	downArrowOverSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_downArrowOverSkin.png",scaleGridLeft="13", scaleGridTop="7", scaleGridRight="14",scaleGridBottom="11");
+	downArrowDownSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_downArrowDownSkin.png",scaleGridLeft="13", scaleGridTop="7", scaleGridRight="14",scaleGridBottom="11");
+	downArrowDisabledSkin: Embed(source="SourCherry/NumericStepper/NumericStepper_downArrowDisabledSkin.png",scaleGridLeft="13", scaleGridTop="7", scaleGridRight="14",scaleGridBottom="11");
+}
+
+/* Settings for the Panel component */
+
+mx|Panel {
+ 	borderSkin: Embed(source="SourCherry/Panel/panelBorderSkin.png",scaleGridLeft="18",
+ 		scaleGridTop="60",scaleGridRight="169",scaleGridBottom="228");
+	paddingTop: 45px;
+	paddingRight: 15px;
+	paddingBottom: 15px; 
+	paddingLeft: 15px;
+	titleStyleName: "panelTitleStyle";
+	statusStyleName: "panelStatusStyle";
+	headerHeight: 45px;
+	titleBackgroundSkin: Embed(source="SourCherry/Panel/headerIcon.png",scaleGridLeft="32",
+		scaleGridTop="37", scaleGridRight="33",scaleGridBottom="38");
+}
+.panelTitleStyle {
+	color: #621319;
+	fontWeight: bold;
+	textIndent: 25px;
+}
+
+.panelStatusStyle {
+	fontSize: 14px;
+	fontStyle: italic;
+	fontWeight: bold;
+}
+
+/* Settings for the TabBar (and related) components. */
+mx|TabNavigator, .secondaryWindowVariation, .pagedContainer  {
+	borderStyle: solid;
+	borderSides: bottom;
+	borderThickness: 10px;
+	borderColor: #621319;
+	backgroundColor: #d3d1ce;
+}
+
+.secondaryWindowVariation {
+	borderThickness: 3px;
+}
+
+.secondaryWindow {
+	backgroundColor: #a9a4a2;
+}
+
+mx|TabNavigator {
+	horizontalGap: 5px;
+	backgroundImage: Embed(source="SourCherry/Tab/TabBackground.png",scaleGridLeft="1",
+		scaleGridTop="43",scaleGridRight="59",scaleGridBottom="62"); 
+	backgroundAttachment: fixed;
+	backgroundSize: "100%"; 
+	tabHeight: 33px;
+}
+
+.pagedContainer {
+	borderSides: bottom,top;
+}
+
+mx|TabBar {
+	horizontalGap: 5px;
+	tabStyleName: "tabBarTab"; 
+	firstTabStyleName: "tabBarTab"; 
+	lastTabStyleName: "tabBarTab"; 
+	selectedTabTextStyleName: "tabBarTab";
+}
+.tabBarTab {
+	selectedUpSkin: Embed(source="SourCherry/Tab/TabBarSkinSelected.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	selectedOverSkin: Embed(source="SourCherry/Tab/TabBarSkinSelected.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	selectedDisabledSkin: Embed(source="SourCherry/Tab/TabBarSkinSelectedDisabled.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	upSkin: Embed(source="SourCherry/Tab/TabBarSkin.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	overSkin: Embed(source="SourCherry/Tab/TabBarSkin.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21"); 
+	disabledSkin: Embed(source="SourCherry/Tab/TabBarSkinDisabled.png",scaleGridLeft="3",scaleGridTop="3",scaleGridRight="57",scaleGridBottom="21");
+	fontSize: 14px;
+	fontWeight: normal;
+	color: #f5f5f8;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	disabledColor: #c0c0c0;
+	paddingLeft: 10px;
+	paddingRight: 10px;
+	paddingTop: 4px;
+}
+
+/* Settings for the button component */
+/*
+NOTE: not includding "mx|Button" here because it would affect the look of the buttons 
+inside the Window header (minimize, maximize/restore, close), in a way that cannot
+easily be circumvented.
+*/
+.skinnedButton, .buttonBarButton {
+	upSkin: Embed(source="SourCherry/Button/Button_upSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	overSkin: Embed(source="SourCherry/Button/Button_overSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	downSkin: Embed(source="SourCherry/Button/Button_downSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	disabledSkin: Embed(source="SourCherry/Button/Button_disabledSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	selectedUpSkin: Embed(source="SourCherry/Button/Button_downSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	selectedOverSkin: Embed(source="SourCherry/Button/Button_downSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	selectedDownSkin: Embed(source="SourCherry/Button/Button_downSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	selectedDisabledSkin: Embed(source="SourCherry/Button/Button_disabledSkin.png",scaleGridLeft="16",scaleGridTop="19",scaleGridRight="43",scaleGridBottom="21");
+	color: #e9e7e7;
+	fontWeight: normal;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #cccccc;
+	disabledColor: #999999;
+}
+
+/* Settings for the ButtonBar (and related) components */
+mx|ButtonBar {
+	buttonStyleName: "buttonBarButton";
+	firstButtonStyleName: "buttonBarButton";
+	lastButtonStyleName: "buttonBarButton";
+	selectedButtonTextStyleName: "buttonSelectedText";
+}
+.buttonSelectedText {
+	color: #E9E7E7;
+}
+mx|ToggleButtonBar {
+	horizontalGap: 5px;
+}
+
+/* Settings for the PopupButton (and related) components */
+mx|PopUpButton, mx|PopUpMenuButton {
+	upSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_upSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	popUpOverSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_overSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	overSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_popUpOverSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	popUpDownSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_downSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	downSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_popUpDownSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	disabledSkin: Embed(source="SourCherry/PopUpButton/PopUpButton_disabledSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="40",scaleGridBottom="16");
+	closeDuration: 0;
+	openDuration: 0;
+	selectionDuration: 0;
+	arrowButtonWidth: 21px;
+	popUpStyleName: "popupUiStyle";
+	fontWeight: normal;
+	color: #e9e7e7;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#cccccc;
+	textDisabledColor:#999999;
+	disabledColor:#999999;
+	paddingLeft: 5px;
+	paddingRight: 5px;
+}
+.popupUiStyle {
+	textAlign: left;
+}
+
+/* Settings for the Label (and related) components */
+mx|Label, mx|Text, mx|CheckBox, mx|RadioButton, mx|ProgressBar, .invertedText, .chromeWindowTitleStyle {
+	fontSize: 14px;
+	fontWeight: normal;
+	color: #2c0c01;
+	textRollOverColor: #2c0c01;
+	textSelectedColor: #2c0c01;
+}
+
+.invertedText {
+	color: #ffe1d6;
+	textRollOverColor: #ffe1d6;
+	textSelectedColor: #ffe1d6;
+}
+
+/* Settings for the Text (and related) components */
+mx|Text, mx|Label {
+	backgroundAlpha: 0;
+}
+
+/* Settings for the TextInput (and related) components */
+mx|TextInput, mx|TextArea, .ddTextInput, .textField {
+	cornerRadius:3px;
+	backgroundColor: #777777;
+	color: #ffffff;
+	backgroundDisabledColor: #cccccc;
+	disabledColor: #999999;
+	borderStyle: solid;
+	borderThickness: 0;
+	borderColor: #999999;
+	dropShadowEnabled: false;
+	paddingLeft: 8px;
+	paddingRight: 8px;
+	padding-top: 2px;
+}
+
+/* Settings for the ComboBox component */
+mx|ComboBox {
+	upSkin: Embed(source="SourCherry/ComboBox/ComboBox_upSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="58",scaleGridBottom="16");
+	overSkin: Embed(source="SourCherry/ComboBox/ComboBox_overSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="58",scaleGridBottom="16");
+	downSkin: Embed(source="SourCherry/ComboBox/ComboBox_downSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="58",scaleGridBottom="16");
+	disabledSkin: Embed(source="SourCherry/ComboBox/ComboBox_DisabledSkin.png",scaleGridLeft="15",scaleGridTop="14", scaleGridRight="58",scaleGridBottom="16");
+	dropdownStyleName: "ddList";
+	closeDuration: 0;
+	openDuration: 0;
+	selectionDuration: 0;
+	fontWeight: normal;
+	color: #e9e7e7;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#cccccc;
+	textDisabledColor:#999999;
+	disabledColor:#999999;
+	paddingLeft: 5px;
+	paddingRight: 5px;
+	
+	editableUpSkin: Embed(source="SourCherry/ComboBox/ComboBox_editableUpSkin.png");
+	editableOverSkin: Embed(source="SourCherry/ComboBox/ComboBox_editableOverSkin.png");
+	editableDisabledSkin: Embed(source="SourCherry/ComboBox/ComboBox_editableDisabledSkin.png");
+	editableDownSkin: Embed(source="SourCherry/ComboBox/ComboBox_editableDownSkin.png");
+	arrowButtonWidth: 15px;
+	textInputStyleName: "ddTextInput";
+}
+.ddList, mx|List, mx|TileList, mx|HorizontalList {
+	backgroundColor:#111111;
+	color: #ffffff;
+	rollOverColor: #3f0306;
+	selectionColor: #621319;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	textDisabledColor:#999999;
+	disabledColor:#999999;
+	closeDuration: 0;
+	openDuration: 0;
+	borderStyle: "none";
+}
+
+/* Settings for the CheckBox component */
+mx|CheckBox {
+	disabledIcon: Embed(source="SourCherry/CheckBox/CheckBox_disabledIcon.png");
+	downIcon: Embed(source="SourCherry/CheckBox/CheckBox_selectedUpIcon.png");
+	overIcon: Embed(source="SourCherry/CheckBox/CheckBox_overIcon.png");
+	selectedDisabledIcon: Embed(source="SourCherry/CheckBox/CheckBox_selectedDisabledIcon.png");
+	selectedDownIcon: Embed(source="SourCherry/CheckBox/CheckBox_selectedUpIcon.png");
+	selectedOverIcon: Embed(source="SourCherry/CheckBox/CheckBox_selectedUpIcon.png");
+	selectedUpIcon: Embed(source="SourCherry/CheckBox/CheckBox_selectedUpIcon.png");
+	upIcon: Embed(source="SourCherry/CheckBox/CheckBox_upIcon.png");
+}
+
+/* Settings for the RadioButton component */
+mx|RadioButton {
+	upIcon: Embed(source="SourCherry/RadioButton/RadioButton_upIcon.png");
+	overIcon: Embed(source="SourCherry/RadioButton/RadioButton_overIcon.png");
+	downIcon: Embed(source="SourCherry/RadioButton/RadioButton_downIcon.png");
+	disabledIcon: Embed(source="SourCherry/RadioButton/RadioButton_disabledIcon.png");
+	selectedUpIcon: Embed(source="SourCherry/RadioButton/RadioButton_downIcon.png");
+	selectedOverIcon: Embed(source="SourCherry/RadioButton/RadioButton_downIcon.png");
+	selectedDownIcon: Embed(source="SourCherry/RadioButton/RadioButton_downIcon.png");
+	selectedDisabledIcon: Embed(source="SourCherry/RadioButton/RadioButton_selectedDisabledIcon.png");
+	
+}
+
+/* Settings for the LinkButton component */
+mx|LinkButton, .link {
+	upSkin: Embed(source="SourCherry/LinkButton/linkButtonSkin.png");
+	overSkin: Embed(source="SourCherry/LinkButton/linkButtonSkin.png");
+	downSkin: Embed(source="SourCherry/LinkButton/linkButtonSkin.png");
+	disabledSkin: Embed(source="SourCherry/LinkButton/linkButtonSkin.png");
+	color: #983F41;
+	disabledColor: #999999;
+	textRollOverColor: #888672;
+	textSelectedColor: #888672;
+	textDecoration: underline;
+	fontSize: 14px;
+	paddingLeft: 0;
+	paddingRight: 0;
+}
+
+/* Settings for the LinkBar component */
+mx|LinkBar {
+	separatorColor: #444444;
+}
+
+/* Settings for the ProgressBar component */
+mx|ProgressBar {
+	barSkin: Embed(source="SourCherry/ProgressBar/ProgressBar_barSkin.png");
+	trackSkin: Embed(source="SourCherry/ProgressBar/ProgressBar_trackSkin.png");
+	maskSkin: Embed(source="SourCherry/ProgressBar/ProgressBar_trackSkin.png");
+	paddingLeft:0;
+	paddingRight:0;
+	verticalGap:0;
+	horizontalGap:0;
+}
+
+/* Settings for the VSlider and HSlider components */
+mx|Slider, mx|HSlider, mx|VSlider {
+	thumbUpSkin: Embed(source="SourCherry/Slider/Slider_thumbUpSkin.png");
+	thumbOverSkin: Embed(source="SourCherry/Slider/Slider_thumbOverSkin.png");
+	thumbDownSkin: Embed(source="SourCherry/Slider/Slider_thumbDownSkin.png");
+	thumbDisabledSkin: Embed(source="SourCherry/Slider/Slider_thumbDisabledSkin.png");
+	trackSkin: Embed(source="SourCherry/Slider/Slider_trackSkin.png");
+	trackHighlightSkin: Embed(source="SourCherry/Slider/Slider_trackHighlightSkin.png");
+	slideDuration: 0;
+	tickColor: #333333; 
+}
+
+/* Settings for the ColorPicker component */
+mx|ColorPicker {
+	upSkin: Embed(source="SourCherry/ColorPicker/ColorPicker_upSkin.png");
+	overSkin: Embed(source="SourCherry/ColorPicker/ColorPicker_downSkin.png");
+	downSkin: Embed(source="SourCherry/ColorPicker/ColorPicker_downSkin.png");
+	disabledSkin: Embed(source="SourCherry/ColorPicker/ColorPicker_disabledSkin.png");
+	closeDuration: 0;
+	openDuration: 0;
+	swatchPanelStyleName: "swpStyle";
+}
+.swpStyle {
+    backgroundColor: #fafafa;
+    previewHeight: 0;
+    previewWidth: 0;
+    textFieldWidth: 0;
+}
+
+/* Settings for the DateChooser component */
+mx|DateField {
+	disabledSkin: Embed(source="SourCherry/DateChooser/DateField_disabledSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="13",scaleGridBottom="20");
+	downSkin: Embed(source="SourCherry/DateChooser/DateField_downSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="13",scaleGridBottom="20");
+	overSkin: Embed(source="SourCherry/DateChooser/DateField_overSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="13",scaleGridBottom="20");
+	upSkin: Embed(source="SourCherry/DateChooser/DateField_upSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="13",scaleGridBottom="20");
+	dateChooserStyleName: "dchStyle";
+}
+mx|DateChooser, .dchStyle {
+	backgroundColor: #777777;
+	color: #ffffff;
+	backgroundDisabledColor: #606060;
+	disabledColor: #c0c0c0;
+	headerColors: #777777,#777777;
+	borderThickness: 1;
+	borderColor: #333333;
+	cornerRadius: 0;
+	headerStyleName: "hdrStyle";
+	nextMonthDisabledSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextMonthDisabledSkin.png");
+	nextMonthDownSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextMonthDownSkin.png");
+	nextMonthOverSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextMonthOverSkin.png");
+	nextMonthUpSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextMonthUpSkin.png");
+	nextYearUpSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextYearUpSkin.png");
+	nextYearOverSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextYearUpSkin.png");
+	nextYearDownSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextYearUpSkin.png");
+	nextYearDisabledSkin: Embed(source="SourCherry/DateChooser/DateChooser_nextYearDisabledSkin.png");
+	prevYearUpSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevYearUpSkin.png");
+	prevYearOverSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevYearUpSkin.png");
+	prevYearDownSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevYearUpSkin.png");
+	prevYearDisabledSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevYearDisabledSkin.png");
+	prevMonthDisabledSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevMonthDisabledSkin.png");
+	prevMonthDownSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevMonthDownSkin.png");
+	prevMonthOverSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevMonthOverSkin.png");
+	prevMonthUpSkin: Embed(source="SourCherry/DateChooser/DateChooser_prevMonthUpSkin.png");
+	rollOverIndicatorSkin: Embed(source="SourCherry/DateChooser/DateChooser_rollOverIndicatorSkin.png");
+	selectionIndicatorSkin: Embed(source="SourCherry/DateChooser/DateChooser_selectionIndicatorSkin.png");
+	todayIndicatorSkin: Embed(source="SourCherry/DateChooser/DateChooser_todayIndicatorSkin.png");
+}
+.hdrStyle {
+	fontWeight: bold;
+}
+
+/* Settings for the Tree component */
+mx|Tree, .customTree {
+	cornerRadius:6px;
+	defaultLeafIcon: Embed(source="SourCherry/Tree/Tree_defaultLeafIcon.png");
+	disclosureClosedIcon: Embed(source="SourCherry/Tree/Tree_disclosureClosedIcon.png");
+	disclosureOpenIcon: Embed(source="SourCherry/Tree/Tree_disclosureOpenIcon.png");
+	folderClosedIcon: Embed(source="SourCherry/Tree/Tree_folderClosedIcon.png");
+	folderOpenIcon: Embed(source="SourCherry/Tree/Tree_folderOpenIcon.png");
+}
+
+/* Settings for the DataGrid component */
+mx|DataGrid {
+	backgroundAlpha: 0;
+	horizontalGridLines: true;
+	horizontalGridLineColor: #000000;
+	verticalGridLines: true;
+	verticalGridLineColor: #000000;
+	borderSkin: Embed(source="SourCherry/DataGrid/DataGrid_borderSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="9",scaleGridBottom="9");
+	headerBackgroundSkin: Embed(source="SourCherry/DataGrid/DataGrid_headerBackgroundSkin.png", 
+		scaleGridLeft="1", scaleGridTop="1", scaleGridRight="9",scaleGridBottom="9");
+	headerSeparatorSkin: Embed(source="SourCherry/DataGrid/DataGrid_headerSeparatorSkin.png");
+	headerStyleName: "dgrdHeaderStyle";
+	color: #000000;
+	rollOverColor: #000000;
+	selectionColor: #621319;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	selectionDuration: 0;
+	sortArrowSkin: Embed(source="SourCherry/DataGrid/DataGrid_sortArrowSkin.png");
+	textAlign: center;
+	verticalAlign: middle;
+}
+.dgrdHeaderStyle {
+	color: #ffffff;
+	fontWeight: bold;
+}
+
+/* Settings for the OLAPDataGrid component */
+mx|OLAPDataGrid {
+ 	backgroundAlpha: 0;
+	headerColors: #777777, #777777;
+	indentation: 0;
+	horizontalGridLines: true;
+	horizontalGridLineColor: #777777;
+	verticalGridLines: true;
+	verticalGridLineColor: #777777;
+	borderSkin: Embed(source="SourCherry/DataGrid/DataGrid_borderSkin.png", scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="9",scaleGridBottom="9");
+ 	headerBackgroundSkin: Embed(source="SourCherry/OLAPDataGrid/DataGrid_headerBackgroundSkin.png", 
+		scaleGridLeft="1", scaleGridTop="1", scaleGridRight="9",scaleGridBottom="9");
+	headerSeparatorSkin: Embed(source="SourCherry/DataGrid/DataGrid_headerSeparatorSkin.png");
+	headerHorizontalSeparatorSkin : Embed(source="SourCherry/OLAPDataGrid/DataGrid_horizontalHeaderSeparatorSkin.png");
+	headerStyleName: "dgrdHeaderStyle";
+	columnAxisHeaderStyleName: "dgrdHeaderStyle";
+	rowAxisHeaderStyleName: "dgrdHeaderStyle";
+ 	color: #000000;
+	rollOverColor: #000000;
+	selectionColor: #621319;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #ffffff;
+	selectionDuration: 0;
+	sortArrowSkin: Embed(source="SourCherry/DataGrid/DataGrid_sortArrowSkin.png");
+	textAlign: center;
+	verticalAlign: middle; 
+}
+.dgrdHeaderStyle {
+	color: #ffffff;
+	fontWeight: bold;
+}
+
+/* Settings for the Tooltip component */
+mx|ToolTip {
+	backgroundColor: #111111;
+	backgroundAlpha: 1;
+	backgroundDisabledColor: #000000;
+	cornerRadius: 0;
+	color: #ffffff;
+	disabledColor: #ffffff;
+	dropShadowEnabled:false;
+	fontSize: 14px;
+}
+
+/* Settings for the Alert component */
+mx|Alert, mx|TitleWindow {
+	borderSkin: Embed(skinClass="mx.skins.halo.PanelSkin");
+	borderAlpha: 0.7;
+	borderColor: #333333;
+	cornerRadius: 0;
+	dropShadowEnabled: false;
+	backgroundAlpha: 0.7;
+	backgroundColor: #333333;
+	titleBackgroundSkin: Embed(source="SourCherry/MenuBar/border.png",scaleGridLeft="1",
+		scaleGridTop="1", scaleGridRight="46",scaleGridBottom="2");
+	headerHeight: 24px;
+	titleStyleName: "alertTextTitle";
+	messageStyleName: "alertTextMessage";
+	buttonStyleName: "alertButton";
+}
+.alertTextTitle {
+	color: #f0f0f0;
+	fontWeight: bold;
+	fontSize: 14px;
+}
+.alertTextMessage {
+	color: #ffffff;
+	fontWeight: normal;
+	fontSize: 14px;
+}
+.alertButton {
+	color: #e9e7e7;
+	textRollOverColor: #ffffff;
+	textSelectedColor: #cccccc;
+	disabledColor: #999999;
+}
+
+/* Settings for the TitleWindow component */
+mx|TitleWindow {
+	closeButtonUpSkin: Embed(source="SourCherry/TitleWindow/TitleWindow_closeButtonUpSkin.png");
+	closeButtonOverSkin: Embed(source="SourCherry/TitleWindow/TitleWindow_closeButtonOverSkin.png");
+	closeButtonDownSkin: Embed(source="SourCherry/TitleWindow/TitleWindow_closeButtonDownSkin.png");
+	closeButtonDisabledSkin: 
+		Embed(source="SourCherry/TitleWindow/TitleWindow_closeButtonDisabledSkin.png");
+}
+
+/* Settings for the ScrollBar components */
+mx|VScrollBar, mx|HScrollBar {
+ 	up-arrow-skin: ClassReference(null);
+ 	down-arrow-skin: ClassReference(null);
+	thumbIcon: ClassReference(null);
+	thumbUpSkin: Embed(source="SourCherry/ScrollBar/VScrollBar_thumbUpSkin.png", scaleGridLeft="2",
+		scaleGridTop="3", scaleGridRight="4", scaleGridBottom="47");
+	thumbDownSkin: Embed(source="SourCherry/ScrollBar/VScrollBar_thumbUpSkin.png", scaleGridLeft="2",
+		scaleGridTop="3", scaleGridRight="4", scaleGridBottom="47");
+	thumbOverSkin: Embed(source="SourCherry/ScrollBar/VScrollBar_thumbUpSkin.png", scaleGridLeft="2",
+		scaleGridTop="3", scaleGridRight="4", scaleGridBottom="47");
+	trackSkin: Embed(source="SourCherry/ScrollBar/VScrollBar_trackSkin.png");
+	trackDisabledSkin: Embed(source="SourCherry/ScrollBar/VScrollBar_trackSkin.png");
+}
+
+/* Settings for the HRule (and related) components */
+mx|HRule, mx|VRule {
+ 	strokeWidth: 2px;
+ 	strokeColor: #777777;
+ 	shadowColor: #ffffff;
+}
+
+
+
+/* Settings for the "Window" component. */
+.chromeWindow {
+	buttonAlignment: right;
+	titleAlignment: left;
+	titleBarBackgroundSkin: ClassReference("ro.ciacob.desktop.skins.cherry.ApplicationTitleBarBackgroundSkin");
+	titleBarButtonPadding: 10px;
+	buttonPadding: 3px;
+	closeButtonSkin: ClassReference("ro.ciacob.desktop.skins.cherry.WindowCloseButtonSkin");
+	minimizeButtonSkin: ClassReference("ro.ciacob.desktop.skins.cherry.WindowMinimizeButtonSkin");
+	maximizeButtonSkin: ClassReference("ro.ciacob.desktop.skins.cherry.WindowMaximizeButtonSkin");
+	restoreButtonSkin: ClassReference("ro.ciacob.desktop.skins.cherry.WindowRestoreButtonSkin");
+	headerHeight: 38px;
+	titleBarColors: #787878, #494949;
+	titleBarCornerRadius: 7px;
+	titleBarBorderColor: #494949;
+	titleBarBorderAlpha: 0.9;
+	titleBarBorderThickness: 1px;	
+	titleTextStyleName: chromeWindowTitleStyle;
+	statusBarBackgroundSkin: ClassReference("ro.ciacob.desktop.skins.cherry.StatusBarBackgroundSkin");
+	gripperPadding: 0;
+	gripperStyleName: "chromeWindowGripperStyle";
+	statusBarColors: #494949, #787878;
+	statusBarCornerRadius: 3px;
+	statusBarBorderColor: #494949;
+	statusBarBorderAlpha: 0.9;
+	statusBarBorderThickness: 1px;
+	statusBarPaddingLeft: 10px;
+	statusBarPaddingRight: 20px;
+	statusBarPaddingTop: 1px;
+	statusBarPaddingBottom: 4px;
+	statusTextStyleName : "chromeWindowStatusStyle";
+}
+
+.chromeWindowTitleStyle {
+	fontSize: 15px;
+	color: #ffffff;
+	letterSpacing: 1px;
+	textIndent:10px;
+}
+
+.chromeWindowStatusStyle {
+	letterSpacing: 0;
+	fontSize: 14px;
+	color: #f0f0f0;
+}
+
+.chromeWindowGripperStyle {
+	upSkin:  Embed(source="SourCherry/Window/gripper.png");
+}
